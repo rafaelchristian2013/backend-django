@@ -17,3 +17,29 @@ def getTransacao(resquest, pk):
     transacoes = Transacao.objects.get(id=pk)
     serializer = TransacaoSerializer(transacoes, many=False)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateTransacao(request, pk):
+    data = request.data
+    transacao = Transacao.objects.get(id=pk)
+    serializer = TransacaoSerializer(instance=transacao, data=data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def createTransacao(request):
+    data = request.data
+    transacao = Transacao.objects.create(
+        body=data['body']
+    )
+    serializer = TransacaoSerializer(transacao, many=False)
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def deleteTransacao(request, pk):
+    transacao = Transacao.objects.get(id=pk)
+    transacao.delete()
+    return Response('Transacao was deleted!')
