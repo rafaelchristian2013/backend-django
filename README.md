@@ -1,2 +1,2 @@
 # backend-django
-Fazendo o back-end em django para o front-end em angular de uma aplicação de finanças.
+Fazendo o back-end em django para uma aplicação de finanças.
